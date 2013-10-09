@@ -54,10 +54,10 @@ module JIJI
       end
       
       #成り行きで発注を行います。
-      def order( pair, sell_or_buy, count )
+      def order( pair, sell_or_buy, count, options = {})
         result = @client.request{ |fx|
             fx.order( convert_currency_pair_code_r(pair),
-              sell_or_buy == :buy ? ClickClient::FX::BUY : ClickClient::FX::SELL,  count )
+              sell_or_buy == :buy ? ClickClient::FX::BUY : ClickClient::FX::SELL,  count, options)
         }
         return JIJI::Plugin::SecuritiesPlugin::Position.new( result.open_interest_no )
       end

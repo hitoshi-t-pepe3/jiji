@@ -53,9 +53,16 @@ module JIJI
       #成り行きで発注を行います。
       #pair:: 通貨ペア名
       #sell_or_buy:: 売(:sell)または買い(:buy)
+      #options:: 発注オプション指定 
       #count:: 取引数量
       #return:: JIJI::Plugin::Securities::Position
-      def order( pair, sell_or_buy, count )
+      def order( pair, sell_or_buy, count, options = {})
+      end
+      
+      # 注文をキャンセルします。
+      #order_no:: 注文番号
+      #return:: なし
+      def cancel_order(order_no) 
       end
       
       #建玉を決済します。
