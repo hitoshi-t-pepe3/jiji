@@ -379,8 +379,8 @@ module JIJI
     #count:: 購入する数量
     #pair:: 通貨ペアコード 例) :EURJPY
     #return:: ポジション(JIJI::Position)
-    def buy(count, pair=:EURJPY)
-      p = @operator.buy( count, pair, @agent_name )
+    def buy(count, pair=:EURJPY, options = {})
+      p = @operator.buy( count, pair, @agent_name, options )
       @positions[p.position_id] = p
       return p
     end
@@ -389,8 +389,8 @@ module JIJI
     #count:: 売却する数量
     #pair:: 通貨ペアコード 例) :EURJPY
     #return:: ポジション(JIJI::Position)
-    def sell(count, pair=:EURJPY)
-      p = @operator.sell( count, pair, @agent_name )
+    def sell(count, pair=:EURJPY, options = {})
+      p = @operator.sell( count, pair, @agent_name, options )
       @positions[p.position_id] = p
       return p
     end
@@ -402,6 +402,11 @@ module JIJI
       @positions.delete position.position_id
     end
     
+    # 注文一覧を取得します。
+    def list_orders
+      @operator.list_orders
+    end
+            
     #建て玉
     attr_reader :positions
     attr :agent_name, true
