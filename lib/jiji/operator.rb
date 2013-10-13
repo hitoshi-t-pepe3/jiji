@@ -111,6 +111,10 @@ module JIJI
         @trade_result_dao.save( v ) if @trade_result_dao
       }
     end
+    
+    # 注文一覧を取得します。
+    def list_orders
+    end
 
     #現在の損益
     attr_reader :profit_or_loss
@@ -337,6 +341,17 @@ module JIJI
       super(position)
     end
     
+    # 注文一覧を取得します。
+    def list_orders
+      orders = []
+      if @trade_enable
+        JIJI::Util.log_if_error_and_throw( @logger ) {
+          orders = @client.list_orders
+        }
+      end
+      orders
+    end
+
     def trade_enable=(value)
       @trade_enable = value && conf.get([:system,:trade_enable], true)
     end
@@ -386,7 +401,7 @@ module JIJI
       @operator.commit(position)
       @positions.delete position.position_id
     end
-
+    
     #建て玉
     attr_reader :positions
     attr :agent_name, true
