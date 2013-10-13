@@ -50,7 +50,7 @@ module JIJI
       def list_rates
       end
       
-      #成り行きで発注を行います。
+      #発注を行います。
       #pair:: 通貨ペア名
       #sell_or_buy:: 売(:sell)または買い(:buy)
       #options:: 発注オプション指定 
@@ -69,6 +69,13 @@ module JIJI
       #position_id:: 建玉ID
       #count:: 取引数量
       def commit( position_id, count )
+      end
+      
+      #=== 注文一覧を取得します。
+      #
+      #return:: 注文番号をキーとするClickClientScrap::FX::Orderのハッシュ。
+      #
+      def list_orders()
       end
       
       #===ユーザーに入力を要求するデータの情報

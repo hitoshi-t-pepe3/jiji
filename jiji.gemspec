@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name = "jiji"
-  spec.version = "1.2.8"
+  spec.version = "1.2.8beta1"
   spec.summary = "open and free fx auto trade system."
   spec.author = "Masaya Yamauchi"
   spec.email = "y-masaya@red.hot.co.jp"
