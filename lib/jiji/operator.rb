@@ -47,7 +47,7 @@ module JIJI
     #pair:: 通貨ペア(:EURJPYなど)
     #trader:: 取引実行者識別用の名前
     #return:: Position
-    def buy(count, pair=:EURJPY, trader="")
+    def buy(count, pair=:EURJPY, trader="", options = {})
       rate = @rate[pair]
       unit = @rate.pair_infos[pair].trade_unit
       p = Position.new( UUIDTools::UUID.random_create().to_s, Position::BUY, count,
@@ -64,7 +64,7 @@ module JIJI
     #pair:: 通貨ペア(:EURJPYなど)
     #trader:: 取引実行者識別用の名前
     #return:: Position
-    def sell(count, pair=:EURJPY, trader="")
+    def sell(count, pair=:EURJPY, trader="", options = {})
       rate = @rate[pair]
       unit = @rate.pair_infos[pair].trade_unit
       p = Position.new( UUIDTools::UUID.random_create().to_s, Position::SELL, count,
@@ -300,13 +300,13 @@ module JIJI
     #===購入する
     #count:: 購入する数量
     #return:: Position
-    def buy(count, pair=:EURJPY, trader="")
+    def buy(count, pair=:EURJPY, trader="", options = {})
       id = nil
       if @trade_enable
         JIJI::Util.log_if_error_and_throw( @logger ) {
           rate = @rate[pair]
           # 成り行きで買い
-          id = @client.order( pair, :buy, count ).position_id
+          id = @client.order( pair, :buy, count, options).position_id
         }
       end
       p = super(count, pair, trader)
@@ -317,13 +317,13 @@ module JIJI
     #===売却する
     #count:: 売却する数量
     #return:: Position
-    def sell(count, pair=:EURJPY, trader="")
+    def sell(count, pair=:EURJPY, trader="", options = {})
       id = nil
       if @trade_enable
         JIJI::Util.log_if_error_and_throw( @logger ) {
           rate = @rate[pair]
           # 成り行きで売り
-          id = @client.order( pair, :sell, count ).position_id
+          id = @client.order( pair, :sell, count, options).position_id
         }
       end
       p = super(count, pair, trader)
