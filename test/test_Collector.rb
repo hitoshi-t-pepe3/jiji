@@ -5,6 +5,7 @@ $: << "../lib"
 require 'rubygems'
 require 'runit/testcase'
 require 'runit/cui/testrunner'
+require 'jiji/agent/agent'
 require 'jiji/configuration'
 require 'jiji/collector'
 require 'jiji/operator'

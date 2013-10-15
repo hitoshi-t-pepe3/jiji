@@ -50,6 +50,11 @@ module JIJI
       def list_rates
       end
       
+      #=== 注文一覧を取得します。
+      #return:: 注文番号をキーとするClickClientScrap::FX::Orderのハッシュ。
+      def list_orders
+      end
+      
       #発注を行います。
       #pair:: 通貨ペア名
       #sell_or_buy:: 売(:sell)または買い(:buy)
@@ -71,12 +76,6 @@ module JIJI
       def commit( position_id, count )
       end
       
-      #=== 注文一覧を取得します。
-      #
-      #return:: 注文番号をキーとするClickClientScrap::FX::Orderのハッシュ。
-      #
-      def list_orders()
-      end
       
       #===ユーザーに入力を要求するデータの情報
       #key:: データのキー

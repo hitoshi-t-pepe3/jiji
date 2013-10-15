@@ -53,6 +53,10 @@ module JIJI
         }
       end
       
+      #=== 注文一覧を取得します。
+      def list_orders
+      end
+      
       #成り行きで発注を行います。
       def order( pair, sell_or_buy, count, options = {})
         result = @client.request{ |fx|

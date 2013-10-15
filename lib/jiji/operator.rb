@@ -10,7 +10,7 @@ module JIJI
 
   #==オペレーター
   class Operator #:nodoc:
-
+    
     #===コンストラクタ
     #*money*:: 保証金
     def initialize( trade_result_dao=nil, money=nil )
@@ -115,7 +115,7 @@ module JIJI
     # 注文一覧を取得します。
     def list_orders
     end
-
+    
     #現在の損益
     attr_reader :profit_or_loss
     #現在の確定済み損益
@@ -344,9 +344,10 @@ module JIJI
     # 注文一覧を取得します。
     def list_orders
       orders = []
+      super
       if @trade_enable
         JIJI::Util.log_if_error_and_throw( @logger ) {
-          orders = @client.list_orders
+         orders = @client.list_orders
         }
       end
       orders
@@ -402,7 +403,8 @@ module JIJI
       @positions.delete position.position_id
     end
     
-    # 注文一覧を取得します。
+    #===注文一覧を取得します。
+    #return:: order
     def list_orders
       @operator.list_orders
     end

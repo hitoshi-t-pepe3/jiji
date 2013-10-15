@@ -9,6 +9,7 @@ require 'runit/testcase'
 require 'runit/cui/testrunner'
 require 'logger'
 require 'jiji/plugin/plugin_loader'
+require 'jiji/agent/agent'
 
 # Loader のテスト
 class LoaderTest <  RUNIT::TestCase
