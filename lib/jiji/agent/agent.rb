@@ -1,3 +1,4 @@
+﻿# -*- encoding: UTF-8 -*-
 
 require 'jiji/util/file_lock'
 require "jiji/models"

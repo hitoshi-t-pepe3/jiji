@@ -1,4 +1,4 @@
-require "fileutils"
+﻿require "fileutils"
 
 # File.flockを利用したRead-Write-Lock
 class FileLock

@@ -1,4 +1,7 @@
 #!/usr/bin/env ruby
+# -*- encoding: UTF-8 -*-
+
+$:.unshift File.expand_path("../lib", File.dirname(__FILE__))
 
 require 'rubygems'
 require 'jiji/command'

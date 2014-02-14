@@ -1,4 +1,4 @@
-
+﻿
 require 'jiji/error'
 
 module JIJI

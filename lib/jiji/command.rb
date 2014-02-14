@@ -1,4 +1,4 @@
-
+﻿
 require 'rubygems'
 require "highline"
 require 'logger'

@@ -1,4 +1,4 @@
-
+﻿
 require 'thread'
 
 # ブロックを渡して処理を行なうAPIを

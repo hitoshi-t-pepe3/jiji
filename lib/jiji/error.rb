@@ -1,4 +1,4 @@
-
+﻿
 module JIJI
 
   class AbstractError < StandardError

@@ -1,4 +1,4 @@
-
+﻿
 #require 'jiji/plugin/embedded/click_securities_demo_plugin'
 #
 #JIJI::Plugin.register( 

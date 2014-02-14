@@ -1,4 +1,4 @@
-
+﻿
 require 'jiji/agent/agent'
 require 'jiji/agent/agent_manager'
 require 'jiji/agent/agent_registry'

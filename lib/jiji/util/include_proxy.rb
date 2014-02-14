@@ -1,4 +1,4 @@
-class Module
+﻿class Module
   #プロキシモジュールをincludeする。
   def include_proxy( mod )
     include mod

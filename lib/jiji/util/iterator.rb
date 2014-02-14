@@ -1,4 +1,4 @@
-
+﻿
 # イテレータ
 class Iterator
   # 列挙します

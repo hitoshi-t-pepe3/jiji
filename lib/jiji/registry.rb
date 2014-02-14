@@ -1,4 +1,4 @@
-
+﻿
 require 'rubygems'
 require 'yaml'
 require 'jiji/util/fix_yaml_bug'

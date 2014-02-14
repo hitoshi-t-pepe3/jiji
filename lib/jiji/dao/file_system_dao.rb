@@ -1,4 +1,4 @@
-
+﻿
 require 'fileutils'
 require 'jiji/error'
 

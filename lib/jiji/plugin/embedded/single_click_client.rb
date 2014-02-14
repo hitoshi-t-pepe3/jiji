@@ -1,4 +1,4 @@
-
+﻿
 require "rubygems"
 require "clickclient"
 require 'jiji/util/block_to_session'

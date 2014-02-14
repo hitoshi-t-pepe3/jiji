@@ -1,4 +1,4 @@
-
+﻿
 require 'jiji/util/util'
 require "jiji/dao/timed_data_dao"
 require 'yaml'

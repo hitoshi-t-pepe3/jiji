@@ -1,4 +1,4 @@
-module JIJI
+﻿module JIJI
 #==リアル取引用オペレーター
   class RmtOperator < Operator #:nodoc:
 

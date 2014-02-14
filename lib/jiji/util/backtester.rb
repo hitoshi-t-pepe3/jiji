@@ -1,4 +1,4 @@
-require "rubygems"
+﻿require "rubygems"
 require "jiji/util/json_rpc_requestor"
 require 'uuidtools'
 

@@ -1,4 +1,4 @@
-require 'jiji/error'
+﻿require 'jiji/error'
 require 'date'
 require 'jiji/util/csv_append_support'
 require 'jiji/util/file_lock'

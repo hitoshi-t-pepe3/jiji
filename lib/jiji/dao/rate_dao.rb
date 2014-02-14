@@ -1,4 +1,4 @@
-
+﻿
 require 'thread'
 require 'jiji/util/csv_append_support'
 require 'jiji/util/util'

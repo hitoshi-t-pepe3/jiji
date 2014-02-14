@@ -1,4 +1,4 @@
-module JIJI
+﻿module JIJI
   module Service
     class TradeResultService
       

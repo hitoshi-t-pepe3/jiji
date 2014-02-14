@@ -1,4 +1,4 @@
-
+﻿
 require 'kconv'
 require 'rubygems'
 require 'mechanize'

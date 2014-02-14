@@ -1,4 +1,4 @@
-require 'thread'
+﻿require 'thread'
 
 # スレッドを使ったGenerator
 class ThreadUseGenerator

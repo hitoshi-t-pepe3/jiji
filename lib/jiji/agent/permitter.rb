@@ -1,4 +1,4 @@
-
+﻿
 require 'jiji/error'
 require 'jiji/util/file_lock'
 require 'set'

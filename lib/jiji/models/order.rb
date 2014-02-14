@@ -1,4 +1,4 @@
-# -*- encoding:utf-8 -*-
+﻿# -*- encoding:utf-8 -*-
 module JIJI
   module Modles
     #===注文

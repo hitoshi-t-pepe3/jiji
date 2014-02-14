@@ -1,4 +1,4 @@
-module JIJI
+﻿module JIJI
   module Models
 	  #===オペレータ
 	  #取引を行うためのクラスです。

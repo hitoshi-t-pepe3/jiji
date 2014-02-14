@@ -1,4 +1,4 @@
-
+﻿
 require 'thread'
 require 'set'
 

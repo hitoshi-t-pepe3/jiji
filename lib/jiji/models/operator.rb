@@ -1,4 +1,4 @@
-module JIJI
+﻿module JIJI
 
   #==オペレーター
   class Operator #:nodoc:

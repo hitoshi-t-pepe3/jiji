@@ -1,4 +1,4 @@
-
+﻿
 require 'jiji/util/fix_yaml_bug'
 require 'jiji/util/file_lock'
 

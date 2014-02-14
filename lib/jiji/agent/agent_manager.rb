@@ -1,4 +1,4 @@
-
+﻿
 require 'jiji/error'
 require 'jiji/agent/agent'
 require 'jiji/agent/agent_registry'

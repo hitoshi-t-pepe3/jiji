@@ -1,4 +1,4 @@
-
+﻿
 require "jiji/models"
 require "jiji/dao/rate_dao"
 require 'jiji/util/util'

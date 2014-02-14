@@ -1,4 +1,4 @@
-
+﻿
 require 'jiji/plugin/securities_plugin'
 require 'jiji/plugin/embedded/single_click_client'
 

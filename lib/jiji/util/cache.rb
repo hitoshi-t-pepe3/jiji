@@ -1,4 +1,4 @@
-require "fileutils"
+﻿require "fileutils"
 require 'jiji/util/file_lock'
 require 'kconv'
 require 'yaml'

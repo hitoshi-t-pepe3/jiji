@@ -1,4 +1,4 @@
-
+﻿
 require 'fileutils'
 require 'delegate'
 require 'jiji/util/util'
