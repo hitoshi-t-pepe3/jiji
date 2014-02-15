@@ -4,7 +4,7 @@ require 'jiji/agent/agent'
 require 'jiji/agent/util'
 require 'jiji/util/file_lock'
 require 'set'
-require 'logger'
+require 'jiji/log'
 
 module JIJI
 
@@ -98,6 +98,7 @@ module JIJI
     def load_all
       [@agent_dir,@shared_lib_dir].each {|d|
         @file_dao.list( d, true ).each {|item|
+          server_logger.debug "init load item: #{item[:path]}"
           next if item[:type] == :directory
           begin
             inner_load( item[:path] )
@@ -138,9 +139,10 @@ module JIJI
       else
         return # agent,shared_lib配下のファイル以外は読み込まない。
       end
-      safe( conf.get( [:agent,:safe_level], 4) ){
+      #!issue
+      #safe( conf.get( [:agent,:safe_level], 4) ){
         m.module_eval( body, file, 1 )
-      }
+      #}
     end
 
     def find_agent( file, m, checked, &block )

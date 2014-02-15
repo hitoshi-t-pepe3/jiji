@@ -5,6 +5,8 @@ require 'jiji/util/util'
 require "thread"
 require "date"
 
+require 'pp'
+
 module JIJI
 
   #
@@ -95,6 +97,7 @@ module JIJI
             r
           }
         }
+        # 収集
         collect
       rescue Exception
         @error = $!
@@ -116,9 +119,12 @@ module JIJI
       end
     end
     def collect
+      cnt = 0
       while( @end_mutex.synchronize { @alive } ) #停止されるまでループ
         JIJI::Util.log_if_error( @logger ) {
           begin
+            cnt = cnt+1
+            @logger.info "collect! no.#{cnt}"
             #レート
             list = @client.list_rates
             #オブザーバーに通知

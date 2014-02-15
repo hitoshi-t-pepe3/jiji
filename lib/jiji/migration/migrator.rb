@@ -2,7 +2,7 @@
 
 require 'rubygems'
 require 'fileutils'
-require 'logger'
+require 'jiji/log'
 require 'jiji/util/file_lock'
 
 module JIJI

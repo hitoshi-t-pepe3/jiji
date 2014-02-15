@@ -19,7 +19,7 @@ require 'jiji/operator'
 require "jiji/dao/file_system_dao"
 require "jiji/dao/rate_dao"
 require "jiji/dao/trade_result_dao"
-require 'logger'
+require 'jiji/log'
 require 'fileutils'
 require 'jiji/util/synchronize_interceptor'
 
@@ -68,6 +68,7 @@ module JIJI
         r.register( :process_dir ) {
 	        process_dir = "#{r.base_dir}/#{r.conf.get([:dir,:process_log], "process_logs")}"
 	        FileUtils.mkdir_p process_dir
+          r.server_logger.debug "process_dir: #{process_dir}"
           process_dir
         }
         # エージェント置き場
@@ -97,15 +98,20 @@ module JIJI
         r.register( :server_logger ) {
           dir = "#{r.base_dir}/#{r.conf.get([:dir,:log], "logs")}"
           FileUtils.mkdir_p dir
-          l = Logger.new( dir + "/log.txt", 10, 512*1024 )
-          l.level = Logger::DEBUG
+          #l = Logger.new( dir + "/log.txt", 10, 512*1024 )
+          l = Log.new( dir + "/log.txt")
+          l.level = Log::DEBUG
           l
         }
         r.register( :process_logger, :model=>:multiton_initialize ) {|c,p,id|
           dir = "#{r.process_dir}/#{id}"
           FileUtils.mkdir_p dir
-          c = Logger.new( dir + "/log.txt", 10, 512*1024 )
-          r.permitter.proxy( c, [/^(info|debug|warn|error|fatal|close)$/] )
+          r.server_logger.debug "process_logger: #{dir}"
+          #c = Logger.new( dir + "/log.txt", 10, 512*1024 )
+          c = Log.new( dir + "/log.txt")
+          c.level = Log::DEBUG
+          #r.permitter.proxy( c, [/^(info|debug|warn|error|fatal|close)$/] )
+          c
         }
 
         # Permitter
@@ -259,6 +265,8 @@ module JIJI
           c.conf = r.conf
           c
         }
+        # プロセスマネジャサービスに
+        # インスタンス変数を渡してインタセプタを設定
         r.intercept( :process_manager ).with {
           SynchronizeInterceptor
         }.with_options( :id=>:process_manager )

@@ -22,6 +22,7 @@ module JIJI
         begin
           id = File.basename(d)
           next if id == "rmt"
+          @logger.debug "load backtest: #{id}"
           info = @registry.process_info( id )
           process = @registry.process_info(id)
           process.load # 保存しておいた設定情報をロード
@@ -30,10 +31,12 @@ module JIJI
           @logger.error $!
         end
       }
+      @logger.debug "init ProcessManager"
     end
 
     # RMTプロセスをスタートする
     def start
+      @logger.debug "start RMT"
       if @conf.get([:collector,:collect], true )
         begin
           @rmt.load_agents( true )

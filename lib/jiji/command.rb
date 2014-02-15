@@ -1,7 +1,6 @@
-﻿
-require 'rubygems'
+﻿require 'rubygems'
 require "highline"
-require 'logger'
+require 'jiji/log'
 require 'jiji/server'
 require 'jiji/util/json_rpc_requestor'
 require 'jiji/plugin/plugin_loader'
