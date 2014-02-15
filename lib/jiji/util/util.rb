@@ -1,6 +1,7 @@
 ﻿
 require 'kconv'
 require 'jiji/error'
+require 'json'
 
 module JIJI
   

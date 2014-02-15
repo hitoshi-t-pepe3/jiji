@@ -124,9 +124,10 @@ module JIJI
         JIJI::Util.log_if_error( @logger ) {
           begin
             cnt = cnt+1
-            @logger.info "collect! no.#{cnt}"
+            @logger.info "collect no.#{cnt}"
             #レート
             list = @client.list_rates
+            #@logger.debug "list_rate :#{list}"
             #オブザーバーに通知
             @observer_manager.next_rates Rates.new( @pair_infos, list )
             @now = Time.now # 現在時刻を更新

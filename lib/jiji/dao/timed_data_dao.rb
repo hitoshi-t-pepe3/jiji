@@ -3,6 +3,7 @@ require 'date'
 require 'jiji/util/csv_append_support'
 require 'jiji/util/file_lock'
 require 'jiji/util/iterator'
+require 'pp'
 
 module JIJI
   module Dao
@@ -28,9 +29,10 @@ module JIJI
       DATE_FORMAT = "%Y-%m-%d"
       MONTHLY_DATE_FORMAT = "%Y-%m"
 
-      def initialize( root_dir, aggregator=[] )
+      def initialize( root_dir, aggregator=[], logger )
         @root_dir = root_dir
         @aggregator = aggregator
+        @logger = logger
       end
 
       # 指定期間のデータを読み込む
@@ -156,7 +158,7 @@ module JIJI
       # ファイルのデータを列挙する
       def each_file_data( file, start_date=nil, end_date=nil)
         return EmptyIterator.new  unless File.exist? file
-        it =  CSVIterator.new( CSV.open( file, 'r' ) )
+        it =  CSVIterator.new( CSV.open( file, 'r' ), @logger )
         return Filter.new( it ) {|row|
           time = row.last.to_i
           if start_date && time < start_date.to_i
@@ -172,13 +174,16 @@ module JIJI
 
     # CSVReaderをIteratorにする。
     class CSVIterator < Iterator
-      def initialize( reader )
+      def initialize( reader, logger )
         super()
         @reader = reader
         @item = @reader.shift
+        @logger = logger
       end
       def next?
-        !@item.empty?
+        #@logger.debug pp @item
+        # 終端が nil を返すので対応させる
+        @item.nil? ?  false : !@item.empty?
       end
       def next
         begin

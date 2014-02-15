@@ -11,11 +11,12 @@ module JIJI
     # レートDAO
     class RateDao
 
-      def initialize( data_dir, scales=[] )
+      def initialize( data_dir, scales=[], logger )
         @data_dir = data_dir
         @scales = scales
         @daos = {}
         @mutex = Mutex.new
+        @logger = logger
       end
 
       # 所定の期間のレートデータを得る。
@@ -57,7 +58,7 @@ module JIJI
           aggregators = @scales.map {|s| RatesAggregator.new(s) }
           aggregators << RawRatesAggregator.new
 
-          @daos[pair] = TimedDataDao.new( dir, aggregators )
+          @daos[pair] = TimedDataDao.new( dir, aggregators, @logger )
           @daos[pair]
         }
       end

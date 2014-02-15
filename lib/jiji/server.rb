@@ -84,6 +84,7 @@ module JIJI
     end
       
     def do_GET(req, res)
+      @registry.server_logger.debug "--- GET ---"
       begin
         process( req, res, req.query["request"].to_s )
       rescue Exception
@@ -94,6 +95,7 @@ module JIJI
     end
     
     def do_POST(req, res)
+      @registry.server_logger.debug "--- POST ---"
       begin 
         process( req, res, CGI.unescape(req.body.to_s) )
       rescue Exception
@@ -114,11 +116,11 @@ module JIJI
         raise "service not found." if service == nil
         res.body = JSONBroker::Broker.new( service ).invoke( request )
       rescue JIJI::UserError
-        @registry.server_logger.warn $!
+        @registry.server_logger.debug $!
         error =  $!.to_s + " : " + $!.backtrace.join("\n")
         res.body = "[{\"error\":\"#{$!.code}:#{error}\", \"result\":null}]" 
       rescue JIJI::FatalError
-        @registry.server_logger.error $!
+        @registry.server_logger.debug $!
         error =  $!.to_s + " : " + $!.backtrace.join("\n")
         res.body = "[{\"error\":\"#{$!.code}:#{error}\", \"result\":null}]"
       end

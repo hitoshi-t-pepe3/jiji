@@ -124,7 +124,7 @@ module JIJI
           ["1m", "5m", "10m", "30m", "1h", "6h", "1d", "2d", "5d"]
         }
         r.register( :rate_dao ) {
-          JIJI::Dao::RateDao.new( r.rate_dir, r.scales )
+          c = JIJI::Dao::RateDao.new( r.rate_dir, r.scales, r.server_logger )
         }
         r.register( :trade_result_dao, :model=>:multiton_initialize ) {|c,p,id|
           dir = "#{r.process_dir}/#{id}/trade"
