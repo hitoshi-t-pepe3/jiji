@@ -33,7 +33,7 @@ module JIJI
       @ts = []
       pool_size.times {
 	      @ts << Thread.fork {
-	        $SAFE = level
+	        #$SAFE = level
           while( @alive_mutex.synchronize { @alive } )
             req = @q.pop
             req.exec(self) if req

@@ -13,7 +13,9 @@ module JIJI
 
   class AgentManager
 
+    # safeメソッド組み込み
     include JIJI::AgentUtil
+
     include Enumerable
     State = Struct.new( :agent, :output, :operator, :active )
 
@@ -35,18 +37,19 @@ module JIJI
 
     # エージェントを追加する
     def add( agent_id, agent, agent_name="" )
+      @logger.debug "agent adding"
       if @agents.key? agent_id
         raise UserError.new( JIJI::ERROR_ALREADY_EXIST, "agent is already exist. id=#{agent_id}")
       end
       output = @output_manager.create( @process_id, agent_id )
       output.agent_name = agent_name
-      op = AgentOperator.new( @operator, agent_name )
-      safe( conf.get( [:agent,:safe_level], 4) ){
+      op = AgentOperator.new( @operator, agent_name, @logger )
+      #safe( conf.get( [:agent,:safe_level], 4) ){
         agent.operator = op
         agent.logger = @logger
         agent.output = output
         agent.init
-      }
+      #}
       @agents[agent_id] = State.new( agent, output, op, true )
     end
 
@@ -103,7 +106,7 @@ module JIJI
       @agents.each_pair {|n,a|
           a.output.time = rates.time
       }
-      safe( conf.get( [:agent,:safe_level], 4) ){
+      #safe( conf.get( [:agent,:safe_level], 4) ){
         @agents.each_pair {|n,a|
           next unless a.active
           if @failsafe
@@ -117,7 +120,7 @@ module JIJI
             }
           end
          }
-      }
+      #}
       # 取引結果の集計
       @trade_result_dao.next( operator, rates.time )
     end

@@ -146,7 +146,8 @@ module JIJI
         r.register( :output, :model=>:multiton_initialize ) {|c,p,id,agent_id|
           dir = r.output_dir(id)
           c = JIJI::Output.new(agent_id, dir, r.scales)
-          r.permitter.proxy( c, [/^(get|put|<<)$/], [/^get$/] )
+          #r.permitter.proxy( c, [/^(get|put|<<)$/], [/^get$/] )
+          c
         }
 
         # オブザーバー
@@ -187,7 +188,8 @@ module JIJI
           c = JIJI::RmtOperator.new(r.securities_plugin_manager.selected,
               r.process_logger(id), r.trade_result_dao(id), trade_enable, money)
           c.conf = r.conf
-          r.permitter.proxy( c, [/^(sell|buy|commit)$/], [/^(sell|buy)$/])
+          #r.permitter.proxy( c, [/^(sell|buy|commit)$/], [/^(sell|buy)$/])
+          c
         }
 
         # コレクター

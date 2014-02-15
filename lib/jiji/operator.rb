@@ -370,10 +370,12 @@ module JIJI
   # operator.commit( sell_position ) # 決済
   #
   class AgentOperator
-    def initialize( operator, agent_name ) #:nodoc:
+    def initialize( operator, agent_name, logger ) #:nodoc:
       @operator = operator
       @agent_name = agent_name
       @positions = {}.taint
+      @logger = logger
+      @logger.debug "init AgentOperator"
     end
 
     #====購入します。
@@ -412,7 +414,6 @@ module JIJI
     #建て玉
     attr_reader :positions
     attr :agent_name, true
-  end
-
+  end 
 end
 

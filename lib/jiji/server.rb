@@ -84,7 +84,7 @@ module JIJI
     end
       
     def do_GET(req, res)
-      @registry.server_logger.debug "--- GET ---"
+      @registry.server_logger.debug "--- GET START ---"
       begin
         process( req, res, req.query["request"].to_s )
       rescue Exception
@@ -92,10 +92,11 @@ module JIJI
         error =  $!.to_s + " : " + $!.backtrace.join("\n")
         res.body = "[{\"error\":\"fatal:#{error}\", \"result\":null}]"
       end
+      @registry.server_logger.debug "---  GET END  ---"
     end
     
     def do_POST(req, res)
-      @registry.server_logger.debug "--- POST ---"
+      @registry.server_logger.debug "--- POST START ---"
       begin 
         process( req, res, CGI.unescape(req.body.to_s) )
       rescue Exception
@@ -103,6 +104,7 @@ module JIJI
         error =  $!.to_s + " : " + $!.backtrace.join("\n")
         res.body = "[{\"error\":\"fatal:#{error}\", \"result\":null}]"
       end
+      @registry.server_logger.debug "---  POST END  ---"
     end
     
     def process( req, res, request )
