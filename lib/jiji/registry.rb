@@ -98,8 +98,7 @@ module JIJI
         r.register( :server_logger ) {
           dir = "#{r.base_dir}/#{r.conf.get([:dir,:log], "logs")}"
           FileUtils.mkdir_p dir
-          #l = Logger.new( dir + "/log.txt", 10, 512*1024 )
-          l = Log.new( dir + "/log.txt")
+          l = Log.new( dir + "/log.txt", 20, 512*1024)
           l.level = Log::DEBUG
           l
         }
@@ -107,8 +106,7 @@ module JIJI
           dir = "#{r.process_dir}/#{id}"
           FileUtils.mkdir_p dir
           r.server_logger.debug "process_logger: #{dir}"
-          #c = Logger.new( dir + "/log.txt", 10, 512*1024 )
-          c = Log.new( dir + "/log.txt")
+          c = Log.new( dir + "/log.txt", 20, 512*1024)
           c.level = Log::DEBUG
           #r.permitter.proxy( c, [/^(info|debug|warn|error|fatal|close)$/] )
           c
