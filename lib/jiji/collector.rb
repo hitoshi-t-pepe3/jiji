@@ -120,11 +120,13 @@ module JIJI
     end
     def collect
       cnt = 0
+      start = Time.now
       while( @end_mutex.synchronize { @alive } ) #停止されるまでループ
         JIJI::Util.log_if_error( @logger ) {
           begin
             cnt = cnt+1
-            @logger.info "collect no.#{cnt}"
+            elapsed = (Time.now-start)
+            @logger.info "collect no.#{cnt} elapsed #{Time.at(elapsed).utc.strftime("#{elapsed.to_i/(24*60*60)}d %H:%M:%S")}"
             #レート
             list = @client.list_rates
             #@logger.debug "list_rate :#{list}"
