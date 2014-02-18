@@ -5,6 +5,7 @@ require 'yaml'
 require 'jiji/util/fix_yaml_bug'
 require 'jiji/util/file_lock'
 require 'fileutils'
+require 'pp'
 
 module JIJI
 
@@ -35,13 +36,15 @@ module JIJI
 
     include Enumerable
 
-    def initialize( agent_id, dir, scales=[] ) #:nodoc:
+    def initialize( agent_id, dir, scales=[], logger ) #:nodoc:
+      logger.debug "init Output"
       @dir = "#{dir}/#{agent_id}" # 「ベースディレクトリ/エージェントID/出力名」に保存する。
       FileUtils.mkdir_p @dir
 
       @outs = {}
       @scales = scales
       @agent_id = agent_id
+      @logger = logger
 
       # 既存データの読み込み
       DirLock.new( @dir ).writelock {
@@ -135,7 +138,7 @@ module JIJI
         when :event
           EventOut.new( sub_dir, name, options )
         when :graph
-          GraphOut.new( sub_dir, name, options, @scales )
+          GraphOut.new( sub_dir, name, options, @scales, @logger )
         else
           raise "unkown output type."
       end
@@ -152,10 +155,11 @@ module JIJI
     include Enumerable
 
     # コンストラクタ
-    def initialize( dir, name, options )
+    def initialize( dir, name, options ,logger )
       @dir = dir
       @dao = JIJI::Dao::TimedDataDao.new( dir, aggregators )
       @options = options
+      @logger = logger
     end
 
     # データを読み込む
@@ -203,13 +207,14 @@ module JIJI
   #===グラフデータの出力先
   class GraphOut < BaseOut
     # コンストラクタ
-    def initialize( dir, name, options, scales=[] ) #:nodoc:
+    def initialize( dir, name, options, scales=[], logger) #:nodoc:
       @scales = scales
-      super( dir, name, options )
+      super( dir, name, options, logger)
     end
     #====グラフデータを出力します。
     #numbers:: グラフデータ
     def put( *numbers )
+      @logger.debug pp numbers
       @dao << JIJI::Dao::BasicTimedData.new( numbers << @time.to_i, @time)
     end
     def aggregators #:nodoc:

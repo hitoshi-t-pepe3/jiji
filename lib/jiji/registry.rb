@@ -143,7 +143,7 @@ module JIJI
         }
         r.register( :output, :model=>:multiton_initialize ) {|c,p,id,agent_id|
           dir = r.output_dir(id)
-          c = JIJI::Output.new(agent_id, dir, r.scales)
+          c = JIJI::Output.new(agent_id, dir, r.scales, r.process_logger(id))
           #r.permitter.proxy( c, [/^(get|put|<<)$/], [/^get$/] )
           c
         }

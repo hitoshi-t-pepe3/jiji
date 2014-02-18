@@ -15,6 +15,8 @@ module JIJI
     #registry:: レジストリ
     def initialize( registry )
       @registry = registry
+      @logger = registry.server_logger
+      @logger.debug "init OutputManager"
     end
 
     #指定されたプロセスのOutputを列挙する
