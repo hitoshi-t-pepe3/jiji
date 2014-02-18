@@ -17,6 +17,7 @@
           list[n[0]] ||= {}
           list[n[0]][n[1]] = buff
         }
+        @logger.debug "list_datas process_id #{process_id} names #{pp names}"
         return list
       end
 
@@ -54,6 +55,7 @@
         end
         out = outputs.get(output_name)
         out.set_properties( properties )
+        @logger.debug "agent #{agent_id} prop #{pp properties}"
         return :success
       end
 
@@ -71,6 +73,8 @@
       attr :process_dir, true
       attr :process_manager, true
       attr :output_manager, true
+
+      attr :logger, true
     private
       def is_live_agent( agents, agent_id )
         return false if !agents

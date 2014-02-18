@@ -214,7 +214,6 @@ module JIJI
     #====グラフデータを出力します。
     #numbers:: グラフデータ
     def put( *numbers )
-      @logger.debug pp numbers
       @dao << JIJI::Dao::BasicTimedData.new( numbers << @time.to_i, @time)
     end
     def aggregators #:nodoc:

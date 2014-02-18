@@ -170,7 +170,7 @@ module JIJI
       # プロセスに登録されているエージェントの一覧を得る
       def list_agent( process_id )
         p = process_manager.get( process_id )
-        safe(4) {
+        #safe(4) {
           p.agent_manager.collect.map! {|entry|
             props = entry[1].agent.properties
             {
@@ -183,7 +183,7 @@ module JIJI
               :active=>entry[1].active
             }
           }
-        }
+        #}
       end
 
       # プロセスのエージェントを一時的に無効化する

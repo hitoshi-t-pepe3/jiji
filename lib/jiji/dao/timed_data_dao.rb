@@ -29,10 +29,10 @@ module JIJI
       DATE_FORMAT = "%Y-%m-%d"
       MONTHLY_DATE_FORMAT = "%Y-%m"
 
-      def initialize( root_dir, aggregator=[], logger )
+      def initialize( root_dir, aggregator=[] )
         @root_dir = root_dir
         @aggregator = aggregator
-        @logger = logger
+        #@logger = logger
       end
 
       # 指定期間のデータを読み込む
@@ -143,6 +143,8 @@ module JIJI
       def out( ag, ag_dir, data )
         date = to_date_str( data.time, TimedDataDao.dairy?(ag.scale) )
         file = "#{ag_dir}/#{date}.csv"
+        #@logger.debug "save csv #{file}"
+        #@logger.debug (data.values.map{|i|i.to_s} << data.time.to_i )
         CSV.open( file, 'a' ) {|w|
           w << ( data.values.map{|i|i.to_s} << data.time.to_i )
         }

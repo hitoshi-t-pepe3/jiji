@@ -100,6 +100,23 @@ module JIJI
           FileUtils.mkdir_p dir
           l = Log.new( dir + "/log.txt", 20, 512*1024)
           l.level = Log::DEBUG
+          l.debug "==== server_logger start -------------------"
+          l
+        }
+        r.register( :service_logger ) {
+          dir = "#{r.base_dir}/#{r.conf.get([:dir,:log], "logs")}"
+          FileUtils.mkdir_p dir
+          l = Log.new( dir + "/service_log.txt", 20, 512*1024)
+          l.level = Log::DEBUG
+          l.debug "==== service_logger start ------------------"
+          l
+        }
+        r.register( :agent_logger ) {
+          dir = "#{r.base_dir}/#{r.conf.get([:dir,:log], "logs")}"
+          FileUtils.mkdir_p dir
+          l = Log.new( dir + "/agent_log.txt", 20, 512*1024)
+          l.level = Log::DEBUG
+          l.debug "==== agent_logger start ------------------"
           l
         }
         r.register( :process_logger, :model=>:multiton_initialize ) {|c,p,id|
@@ -107,6 +124,7 @@ module JIJI
           FileUtils.mkdir_p dir
           r.server_logger.debug "process_logger: #{dir}"
           c = Log.new( dir + "/log.txt", 20, 512*1024)
+          c.debug "==== process_logger start ------------------"
           c.level = Log::DEBUG
           #r.permitter.proxy( c, [/^(info|debug|warn|error|fatal|close)$/] )
           c
@@ -175,7 +193,7 @@ module JIJI
         r.register( :agent_registry ) {
           c = JIJI::AgentRegistry.new( r.agent_dir, r.shared_lib_dir )
           c.conf = r.conf
-          c.server_logger = r.server_logger
+          c.agent_logger = r.agent_logger
           c.file_dao = r.agent_file_dao
           c.load_all
           c
@@ -301,6 +319,7 @@ module JIJI
           c.process_manager = r.process_manager
           c.process_dir = r.process_dir
           c.output_manager = r.output_manager
+          c.logger = r.service_logger
           c
         }
         r.register( :process_service ) {

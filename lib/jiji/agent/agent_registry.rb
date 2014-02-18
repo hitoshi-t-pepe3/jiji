@@ -31,11 +31,11 @@ module JIJI
     # エージェントを生成する
     def create(name, properties={})
       cl = get(name)
-      safe( conf.get( [:agent,:safe_level], 4) ){
+      #safe( conf.get( [:agent,:safe_level], 4) ){
 	      agent = cl.new
 	      agent.properties = properties
 	      agent
-      }
+      #}
     end
 
     #エージェントを取得する
@@ -79,18 +79,18 @@ module JIJI
     def get_property_infos(name)
       cl = get(name)
       return [] unless cl
-      safe( conf.get( [:agent,:safe_level], 4) ){
+      #safe( conf.get( [:agent,:safe_level], 4) ){
         cl.new.property_infos
-      }
+      #}
     end
 
     # エージェントの説明を取得する
     def get_description(name)
       cl = get(name)
       return [] unless cl
-      safe( conf.get( [:agent,:safe_level], 4) ){
+      #safe( conf.get( [:agent,:safe_level], 4) ){
         cl.new.description
-      }
+      #}
     end
 
     # エージェント置き場から、エージェントをロードする。
@@ -98,13 +98,13 @@ module JIJI
     def load_all
       [@agent_dir,@shared_lib_dir].each {|d|
         @file_dao.list( d, true ).each {|item|
-          server_logger.debug "init load item: #{item[:path]}"
+          agent_logger.debug "init load item: #{item[:path]}"
           next if item[:type] == :directory
           begin
             inner_load( item[:path] )
           rescue Exception
             # ログ出力のみ行い、例外は握る。
-            server_logger.error( $! )
+            agent_logger.error( $! )
           end
         }
       }
@@ -126,7 +126,7 @@ module JIJI
 
     attr :conf, true
     attr :file_dao, true
-    attr :server_logger, true
+    attr :agent_logger, true
   private
 
     def inner_load( file )

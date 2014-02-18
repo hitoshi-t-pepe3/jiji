@@ -58,7 +58,7 @@ module JIJI
           aggregators = @scales.map {|s| RatesAggregator.new(s) }
           aggregators << RawRatesAggregator.new
 
-          @daos[pair] = TimedDataDao.new( dir, aggregators, @logger )
+          @daos[pair] = TimedDataDao.new( dir, aggregators )
           @daos[pair]
         }
       end

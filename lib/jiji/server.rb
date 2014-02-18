@@ -114,6 +114,7 @@ module JIJI
         @registry.server_logger.info "access : path=#{req.path}"
         raise "illegal path." unless path =~ /\/json\/([a-zA-Z0-9_]+)$/
         @registry.server_logger.info "access : request=#{request}"
+        # リクエスト毎に対応サービス起動
         service = @registry["#{$1}_service".to_sym]
         raise "service not found." if service == nil
         res.body = JSONBroker::Broker.new( service ).invoke( request )
