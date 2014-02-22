@@ -91,7 +91,7 @@ fx.template.Templates = {
     }
   },
   agentSelector: {
-    defaultName : "名称未設定エージェント",
+    defaultName : "agent",
     error : new Template( '<div class="problem">※#{error}</div>#{msg}'),
     addMsg : "追加するエージェントを選択してください。"
       + '<div style="margin-top:10px;border: 1px solid #FFFFFF;">'
