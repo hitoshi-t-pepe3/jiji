@@ -33,7 +33,6 @@ module JIJI
       end
       # プラグインをロードする。
       def load
-        # ($: + Gem.latest_load_paths).each {|dir|
         ($: + $LOAD_PATH.uniq).each {|dir|
           plugin = File.expand_path "#{dir}/jiji_plugin.rb"
           next unless File.exist? plugin
