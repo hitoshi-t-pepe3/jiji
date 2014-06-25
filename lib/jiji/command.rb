@@ -18,9 +18,13 @@ module JIJI
     # サービスを開始
     def start
       begin
+puts 0
         puts "jiji started."
+puts 1
         s = JIJI::FxServer.new( data_dir )
+puts 2
         s.start
+puts 3
       rescue Exception
         puts "[ERROR] start failed.(#{$!.to_s})"
         return
