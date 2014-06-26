@@ -6,6 +6,8 @@
     *plugin_loader.rbで、
 	Gem.latest_load_pathsの見つからないErrorが発生するのを修正。
     *Mechanize使用時に、ssl_versionをTLSv1を強制的に使用する様に修正
+    *sbiclient、clickclient_scrapのgemにて、mechanize
+	2.7を利用するように修正。
 
 2010-02-07 1.2.8
     * 初回起動時に証券会社の初期設定がクリアされてしまう問題を改修。
