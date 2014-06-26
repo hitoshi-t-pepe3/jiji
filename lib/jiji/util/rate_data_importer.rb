@@ -28,6 +28,7 @@ module JIJI
       client.keep_alive = false
       client.max_history=0
       client.user_agent_alias = 'Windows IE 7'
+      client.ssl_version = 'TLSv1'
 
       # ログイン
       page = client.get("https://sec-sso.click-sec.com/loginweb/")

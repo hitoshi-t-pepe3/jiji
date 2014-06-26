@@ -1,10 +1,11 @@
-2014-06-26 1.2.8a
+2014-06-27 1.2.x
     *gemspec内のhighlineのVersionを1.9.xで動作するVersionへ変更。
     *gemspec中のファイル一覧内のREADMEを修正
     *needleを、github ( zekefast/needle ) の porting_to_1.9.x
 	branchを使用するように、Gemfile、gemspecを修正。
     *plugin_loader.rbで、
 	Gem.latest_load_pathsの見つからないErrorが発生するのを修正。
+    *Mechanize使用時に、ssl_versionをTLSv1を強制的に使用する様に修正
 
 2010-02-07 1.2.8
     * 初回起動時に証券会社の初期設定がクリアされてしまう問題を改修。
