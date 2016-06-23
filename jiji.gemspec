@@ -842,5 +842,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency('clickclient_scrap', '>= 0.1.9')
   spec.add_dependency('sbiclient', '>= 0.1.1')
   spec.add_dependency('nokogiri', '= 1.4.3.1')
-  spec.add_dependency('mechanize', '>= 1.0.0')
+  spec.add_dependency('mechanize', '~> 2.7.3')
 end
